@@ -49,9 +49,8 @@
         </thead>
         <tbody>
             <%
-            if (employees != null) { // Check if employees list is not null
-                // Iterate over the list of employees and generate table rows
-                for (Employee employee : employees) {
+            // Iterate over the list of employees and generate table rows
+            for (Employee employee : employees) {
             %>
             <tr>
                 <td><%= employee.getId() %></td>
@@ -59,13 +58,6 @@
                 <td><%= employee.getSin() %></td>
                 <td><%= employee.getPosition() %></td>
                 <td><%= employee.getAddress() %></td>
-            </tr>
-            <%
-                }
-            } else { // Handle the case when employees list is null
-            %>
-            <tr>
-                <td colspan="5">No employees found</td>
             </tr>
             <% } %>
         </tbody>
