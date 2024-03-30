@@ -13,4 +13,3 @@ CREATE TABLE Employees (
 INSERT INTO Employees VALUES (1, 'Cristiano Ronaldo', '123456789', 'Forward', 'Portugal');
 INSERT INTO Employees VALUES (2, 'Lionel Messi', '987654321', 'Forward', 'Argentina');
 INSERT INTO Employees VALUES (3, 'Pedro Wilkinson', '567890123', 'Midfielder', 'England');
-
