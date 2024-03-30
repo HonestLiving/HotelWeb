@@ -2,6 +2,7 @@
 <%@ page import="com.demo.Employee" %>
 <%@ page import="com.demo.EmployeeService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%
     // Instantiate EmployeeService to access employee data
     EmployeeService employeeService = new EmployeeService();
@@ -14,6 +15,7 @@
         out.println("Error fetching employees: " + e.getMessage());
     }
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

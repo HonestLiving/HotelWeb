@@ -1,3 +1,5 @@
+com\demo\Room.class
 com\demo\EmployeeService.class
+com\demo\RoomService.class
 com\demo\ConnectionDB.class
 com\demo\Employee.class
