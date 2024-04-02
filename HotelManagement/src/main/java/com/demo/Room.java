@@ -5,22 +5,25 @@ package com.demo;
  */
 public class Room {
 
-    private Integer roomNumber;
+    private int roomNumber;
     private String name;
     private double price;
     private int capacity;
+    private double area; // New attribute: room area
+    private String hotelChain; // New attribute: hotel chain
     private boolean upgradable;
     private String damages;
     private String view;
     private String amenities;
     private String address;
 
-    // Constructors
-    public Room(Integer roomNumber, String name, double price, int capacity, boolean upgradable, String damages, String view, String amenities, String address) {
+    public Room(int roomNumber, String name, double price, int capacity, double area, String hotelChain, boolean upgradable, String damages, String view, String amenities, String address) {
         this.roomNumber = roomNumber;
         this.name = name;
         this.price = price;
         this.capacity = capacity;
+        this.area = area;
+        this.hotelChain = hotelChain;
         this.upgradable = upgradable;
         this.damages = damages;
         this.view = view;
@@ -29,6 +32,12 @@ public class Room {
     }
 
     // Getters and Setters
+    public double getArea() {
+        return area;
+    }
+    public String getHotelChain() {
+        return hotelChain;
+    }
     public Integer getRoomNumber() {
         return roomNumber;
     }

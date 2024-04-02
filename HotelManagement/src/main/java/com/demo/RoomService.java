@@ -1,9 +1,8 @@
-// RoomService.java
 package com.demo;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +24,8 @@ public class RoomService {
                         rs.getString("name"),
                         rs.getDouble("price"),
                         rs.getInt("capacity"),
+                        rs.getDouble("area"), // Added area attribute
+                        rs.getString("hotel_chain"), // Added hotel chain attribute
                         rs.getBoolean("upgradable"),
                         rs.getString("damages"),
                         rs.getString("view"),
@@ -47,7 +48,7 @@ public class RoomService {
     // Method to create a room in the database
     public String createRoom(Room room) throws Exception {
         String message = "";
-        String insertRoomQuery = "INSERT INTO Rooms (name, price, capacity, upgradable, damages, view, amenities, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertRoomQuery = "INSERT INTO Rooms (name, price, capacity, area, hotel_chain, upgradable, damages, view, amenities, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         ConnectionDB db = new ConnectionDB();
 
         try (Connection con = db.getConnection();
@@ -56,11 +57,13 @@ public class RoomService {
             stmt.setString(1, room.getName());
             stmt.setDouble(2, room.getPrice());
             stmt.setInt(3, room.getCapacity());
-            stmt.setBoolean(4, room.isUpgradable());
-            stmt.setString(5, room.getDamages());
-            stmt.setString(6, room.getView());
-            stmt.setString(7, room.getAmenities());
-            stmt.setString(8, room.getAddress());
+            stmt.setDouble(4, room.getArea()); // Added area attribute
+            stmt.setString(5, room.getHotelChain()); // Added hotel chain attribute
+            stmt.setBoolean(6, room.isUpgradable());
+            stmt.setString(7, room.getDamages());
+            stmt.setString(8, room.getView());
+            stmt.setString(9, room.getAmenities());
+            stmt.setString(10, room.getAddress());
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -76,77 +79,41 @@ public class RoomService {
         return message;
     }
 
-    // Modified method to search rooms with optional parameters
-    public List<Room> searchRooms(int roomNumber, String name, double minPrice, double maxPrice, int capacity, boolean upgradable, String damages, String view, String amenities, String address) throws Exception {
-        // Construct the base SQL query
-        StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM Rooms WHERE 1 = 1");
+    public List<Room> searchRooms(String name, double minPrice, double maxPrice, int capacity, double area, String hotelChain) throws Exception {
+        String sql = "SELECT * FROM Rooms WHERE 1 = 1";
+        List<Object> params = new ArrayList<>();
 
-        // Add conditions for the provided parameters
-        if (roomNumber > 0) {
-            sqlBuilder.append(" AND room_number = ?");
-        }
-        if (name != null && !name.isEmpty()) {
-            sqlBuilder.append(" AND name LIKE ?");
+        if (!name.isEmpty()) {
+            sql += " AND name LIKE ?";
+            params.add("%" + name + "%");
         }
         if (minPrice >= 0 && maxPrice >= 0) {
-            sqlBuilder.append(" AND price BETWEEN ? AND ?");
+            sql += " AND price BETWEEN ? AND ?";
+            params.add(minPrice);
+            params.add(maxPrice);
         }
         if (capacity > 0) {
-            sqlBuilder.append(" AND capacity = ?");
+            sql += " AND capacity = ?";
+            params.add(capacity);
         }
-        if (upgradable) {
-            sqlBuilder.append(" AND upgradable = true");
+        if (area > 0) {
+            sql += " AND area = ?";
+            params.add(area);
         }
-        if (damages != null && !damages.isEmpty()) {
-            sqlBuilder.append(" AND damages LIKE ?");
+        if (!hotelChain.isEmpty()) {
+            sql += " AND hotel_chain LIKE ?";
+            params.add("%" + hotelChain + "%");
         }
-        if (view != null && !view.isEmpty()) {
-            sqlBuilder.append(" AND view LIKE ?");
-        }
-        if (amenities != null && !amenities.isEmpty()) {
-            sqlBuilder.append(" AND amenities LIKE ?");
-        }
-        if (address != null && !address.isEmpty()) {
-            sqlBuilder.append(" AND address LIKE ?");
-        }
-
-        String sql = sqlBuilder.toString();
-
-        // Execute the SQL query with the provided parameters
         ConnectionDB db = new ConnectionDB();
-        List<Room> rooms = new ArrayList<>();
-
         try (Connection con = db.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
             int parameterIndex = 1;
-
-            if (roomNumber > 0) {
-                stmt.setInt(parameterIndex++, roomNumber);
-            }
-            if (name != null && !name.isEmpty()) {
-                stmt.setString(parameterIndex++, "%" + name + "%");
-            }
-            if (minPrice >= 0 && maxPrice >= 0) {
-                stmt.setDouble(parameterIndex++, minPrice);
-                stmt.setDouble(parameterIndex++, maxPrice);
-            }
-            if (capacity > 0) {
-                stmt.setInt(parameterIndex++, capacity);
-            }
-            if (damages != null && !damages.isEmpty()) {
-                stmt.setString(parameterIndex++, "%" + damages + "%");
-            }
-            if (view != null && !view.isEmpty()) {
-                stmt.setString(parameterIndex++, "%" + view + "%");
-            }
-            if (amenities != null && !amenities.isEmpty()) {
-                stmt.setString(parameterIndex++, "%" + amenities + "%");
-            }
-            if (address != null && !address.isEmpty()) {
-                stmt.setString(parameterIndex++, "%" + address + "%");
+            for (Object param : params) {
+                stmt.setObject(parameterIndex++, param);
             }
 
             ResultSet rs = stmt.executeQuery();
+            List<Room> rooms = new ArrayList<>();
 
             while (rs.next()) {
                 Room room = new Room(
@@ -154,6 +121,8 @@ public class RoomService {
                         rs.getString("name"),
                         rs.getDouble("price"),
                         rs.getInt("capacity"),
+                        rs.getDouble("area"),
+                        rs.getString("hotel_chain"),
                         rs.getBoolean("upgradable"),
                         rs.getString("damages"),
                         rs.getString("view"),
@@ -163,18 +132,19 @@ public class RoomService {
                 rooms.add(room);
             }
 
-            rs.close();
-        } catch (Exception e) {
+            return rooms;
+        } catch (SQLException e) {
             throw new Exception("Error fetching rooms: " + e.getMessage());
         }
-
-        return rooms;
     }
+
+
+
 
     // Method to update room
     public String updateRoom(Room room) throws Exception {
         String message = "";
-        String updateRoomQuery = "UPDATE Rooms SET name=?, price=?, capacity=?, upgradable=?, damages=?, view=?, amenities=?, address=? WHERE room_number=?";
+        String updateRoomQuery = "UPDATE Rooms SET name=?, price=?, capacity=?, area=?, hotel_chain=?, upgradable=?, damages=?, view=?, amenities=?, address=? WHERE room_number=?";
         ConnectionDB db = new ConnectionDB();
 
         try (Connection con = db.getConnection();
@@ -183,12 +153,14 @@ public class RoomService {
             stmt.setString(1, room.getName());
             stmt.setDouble(2, room.getPrice());
             stmt.setInt(3, room.getCapacity());
-            stmt.setBoolean(4, room.isUpgradable());
-            stmt.setString(5, room.getDamages());
-            stmt.setString(6, room.getView());
-            stmt.setString(7, room.getAmenities());
-            stmt.setString(8, room.getAddress());
-            stmt.setInt(9, room.getRoomNumber());
+            stmt.setDouble(4, room.getArea());
+            stmt.setString(5, room.getHotelChain());
+            stmt.setBoolean(6, room.isUpgradable());
+            stmt.setString(7, room.getDamages());
+            stmt.setString(8, room.getView());
+            stmt.setString(9, room.getAmenities());
+            stmt.setString(10, room.getAddress());
+            stmt.setInt(11, room.getRoomNumber());
 
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {

@@ -9,23 +9,41 @@
     // Retrieve list of rooms
     List<Room> rooms = null;
     try {
-        // Check if a price parameter is provided in the request
+        // Check if parameters are provided in the request
+        String name = request.getParameter("name");
+        if (name == null) {
+            name = "";
+        }
+        String hotelChain = request.getParameter("hotelChain");
+        if (hotelChain == null) {
+            hotelChain = "";
+        }
         double minPrice = 0;
         double maxPrice = Double.MAX_VALUE; // Set a default maximum price
-        String priceParam = request.getParameter("price");
-        if (priceParam != null && !priceParam.isEmpty()) {
-            try {
-                minPrice = Double.parseDouble(priceParam);
-            } catch (NumberFormatException e) {
-                // Handle invalid price parameter
-                out.println("Invalid price parameter.");
-            }
+        String minPriceParam = request.getParameter("minPrice");
+        String maxPriceParam = request.getParameter("maxPrice");
+        if (minPriceParam != null && !minPriceParam.isEmpty()) {
+            minPrice = Double.parseDouble(minPriceParam);
+        }
+        if (maxPriceParam != null && !maxPriceParam.isEmpty()) {
+            maxPrice = Double.parseDouble(maxPriceParam);
+        }
+        int capacity = 0;
+        String capacityParam = request.getParameter("capacity");
+        if (capacityParam != null && !capacityParam.isEmpty()) {
+            capacity = Integer.parseInt(capacityParam);
+        }
+        double area = 0;
+        String areaParam = request.getParameter("area");
+        if (areaParam != null && !areaParam.isEmpty()) {
+            area = Double.parseDouble(areaParam);
         }
 
         // Call the searchRooms method with all parameters
-        rooms = roomService.searchRooms(0, "", minPrice, maxPrice, 0, false, "", "", "", "");
+        rooms = roomService.searchRooms(name, minPrice, maxPrice, capacity, area, hotelChain);
     } catch (Exception e) {
         out.println("Error fetching rooms: " + e.getMessage());
+        return;
     }
 %>
 
@@ -53,8 +71,24 @@
 <body>
     <h2>Room List</h2>
     <form action="" method="get">
-        <label for="price">Enter maximum price:</label>
-        <input type="number" id="price" name="price" step="0.01">
+        <label for="name">Room Name:</label>
+        <input type="text" id="name" name="name">
+        <br>
+        <label for="hotelChain">Hotel Chain:</label>
+        <input type="text" id="hotelChain" name="hotelChain">
+        <br>
+        <label for="minPrice">Minimum Price:</label>
+        <input type="number" id="minPrice" name="minPrice" step="0.01">
+        <br>
+        <label for="maxPrice">Maximum Price:</label>
+        <input type="number" id="maxPrice" name="maxPrice" step="0.01">
+        <br>
+        <label for="capacity">Capacity:</label>
+        <input type="number" id="capacity" name="capacity">
+        <br>
+        <label for="area">Area:</label>
+        <input type="number" id="area" name="area" step="0.01">
+        <br>
         <button type="submit">Search</button>
     </form>
     <table>
@@ -64,6 +98,8 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Capacity</th>
+                <th>Area</th> <!-- New table header for Area -->
+                <th>Hotel Chain</th> <!-- New table header for Hotel Chain -->
                 <th>Upgradable</th>
                 <th>Damages</th>
                 <th>View</th>
@@ -79,6 +115,8 @@
                         <td><%= room.getName() %></td>
                         <td>$<%= room.getPrice() %></td>
                         <td><%= room.getCapacity() %></td>
+                        <td><%= room.getArea() %></td> <!-- Display Area -->
+                        <td><%= room.getHotelChain() %></td> <!-- Display Hotel Chain -->
                         <td><%= room.isUpgradable() ? "Yes" : "No" %></td>
                         <td><%= room.getDamages() == null ? "None" : room.getDamages() %></td>
                         <td><%= room.getView() == null ? "N/A" : room.getView() %></td>
@@ -88,7 +126,7 @@
                 <% } %>
             <% } else { %>
                 <tr>
-                    <td colspan="9">No rooms found within the specified price range</td>
+                    <td colspan="11">No rooms found within the specified criteria</td> <!-- Adjust colspan to accommodate the new columns -->
                 </tr>
             <% } %>
         </tbody>
