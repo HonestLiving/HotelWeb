@@ -33,10 +33,10 @@
         if (capacityParam != null && !capacityParam.isEmpty()) {
             capacity = Integer.parseInt(capacityParam);
         }
-        double area = 0;
+        String area = ""; // Change data type to String
         String areaParam = request.getParameter("area");
         if (areaParam != null && !areaParam.isEmpty()) {
-            area = Double.parseDouble(areaParam);
+            area = areaParam;
         }
 
         // Call the searchRooms method with all parameters
@@ -112,7 +112,7 @@
                 <% for (Room room : rooms) { %>
                     <tr>
                         <td><a href="bookings.jsp?roomNumber=<%= room.getRoomNumber() %>"><%= room.getRoomNumber() %></a></td>
-                        
+
 
                         <td><%= room.getName() %></td>
                         <td>$<%= room.getPrice() %></td>
