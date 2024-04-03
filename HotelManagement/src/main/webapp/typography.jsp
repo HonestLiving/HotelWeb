@@ -112,7 +112,7 @@
                 <% for (Room room : rooms) { %>
                     <tr>
                         <td><a href="bookings.jsp?roomNumber=<%= room.getRoomNumber() %>"><%= room.getRoomNumber() %></a></td>
-                        
+
 
                         <td><%= room.getName() %></td>
                         <td>$<%= room.getPrice() %></td>
