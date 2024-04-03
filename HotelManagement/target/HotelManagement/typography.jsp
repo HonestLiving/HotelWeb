@@ -11,11 +11,33 @@
     try {
         // Check if parameters are provided in the request
         String name = request.getParameter("name");
+        if (name == null) {
+            name = "";
+        }
+        String hotelChain = request.getParameter("hotelChain");
+        if (hotelChain == null) {
+            hotelChain = "";
+        }
         double minPrice = 0;
         double maxPrice = Double.MAX_VALUE; // Set a default maximum price
+        String minPriceParam = request.getParameter("minPrice");
+        String maxPriceParam = request.getParameter("maxPrice");
+        if (minPriceParam != null && !minPriceParam.isEmpty()) {
+            minPrice = Double.parseDouble(minPriceParam);
+        }
+        if (maxPriceParam != null && !maxPriceParam.isEmpty()) {
+            maxPrice = Double.parseDouble(maxPriceParam);
+        }
         int capacity = 0;
+        String capacityParam = request.getParameter("capacity");
+        if (capacityParam != null && !capacityParam.isEmpty()) {
+            capacity = Integer.parseInt(capacityParam);
+        }
         double area = 0;
-        String hotelChain = request.getParameter("hotelChain");
+        String areaParam = request.getParameter("area");
+        if (areaParam != null && !areaParam.isEmpty()) {
+            area = Double.parseDouble(areaParam);
+        }
 
         // Call the searchRooms method with all parameters
         rooms = roomService.searchRooms(name, minPrice, maxPrice, capacity, area, hotelChain);
@@ -54,6 +76,18 @@
         <br>
         <label for="hotelChain">Hotel Chain:</label>
         <input type="text" id="hotelChain" name="hotelChain">
+        <br>
+        <label for="minPrice">Minimum Price:</label>
+        <input type="number" id="minPrice" name="minPrice" step="0.01">
+        <br>
+        <label for="maxPrice">Maximum Price:</label>
+        <input type="number" id="maxPrice" name="maxPrice" step="0.01">
+        <br>
+        <label for="capacity">Capacity:</label>
+        <input type="number" id="capacity" name="capacity">
+        <br>
+        <label for="area">Area:</label>
+        <input type="number" id="area" name="area" step="0.01">
         <br>
         <button type="submit">Search</button>
     </form>
