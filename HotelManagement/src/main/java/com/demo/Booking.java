@@ -17,7 +17,7 @@ public class Booking {
         this.room_Number = roomNumber;
     }
 
-    public Integer getCustomerName() {
+    public String getCustomerName() {
         return cName;
     }
 
@@ -25,7 +25,7 @@ public class Booking {
         this.cName = customerName;
     }
 
-    public Integer getEmail() {
+    public String getEmail() {
         return email;
     }
 
