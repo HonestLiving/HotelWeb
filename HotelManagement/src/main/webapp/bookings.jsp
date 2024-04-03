@@ -1,5 +1,6 @@
 <%@ page import="com.demo.Booking" %>
 <%@ page import="com.demo.BookingService" %>
+<%@ page import="java.sql.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
