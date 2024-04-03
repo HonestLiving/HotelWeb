@@ -79,7 +79,7 @@ public class RoomService {
         return message;
     }
 
-    public List<Room> searchRooms(String name, double minPrice, double maxPrice, int capacity, double area, String hotelChain) throws Exception {
+    public List<Room> searchRooms(String name, double minPrice, double maxPrice, int capacity, String area, String hotelChain) throws Exception {
         String sql = "SELECT * FROM Rooms WHERE 1 = 1";
         List<Object> params = new ArrayList<>();
 
@@ -96,7 +96,7 @@ public class RoomService {
             sql += " AND capacity = ?";
             params.add(capacity);
         }
-        if (area > 0) {
+        if (!area.isEmpty()) {
             sql += " AND area = ?";
             params.add(area);
         }
