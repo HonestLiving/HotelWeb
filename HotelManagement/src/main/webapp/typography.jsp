@@ -33,10 +33,10 @@
         if (capacityParam != null && !capacityParam.isEmpty()) {
             capacity = Integer.parseInt(capacityParam);
         }
-        double area = 0;
+        String area = ""; // Change data type to String
         String areaParam = request.getParameter("area");
         if (areaParam != null && !areaParam.isEmpty()) {
-            area = Double.parseDouble(areaParam);
+            area = areaParam;
         }
 
         // Call the searchRooms method with all parameters
