@@ -24,7 +24,7 @@ public class RoomService {
                         rs.getString("name"),
                         rs.getDouble("price"),
                         rs.getInt("capacity"),
-                        rs.getDouble("area"), // Added area attribute
+                        rs.getString("area"), // Added area attribute
                         rs.getString("hotel_chain"), // Added hotel chain attribute
                         rs.getBoolean("upgradable"),
                         rs.getString("damages"),
@@ -57,7 +57,7 @@ public class RoomService {
             stmt.setString(1, room.getName());
             stmt.setDouble(2, room.getPrice());
             stmt.setInt(3, room.getCapacity());
-            stmt.setDouble(4, room.getArea()); // Added area attribute
+            stmt.setString(4, room.getArea()); // Added area attribute
             stmt.setString(5, room.getHotelChain()); // Added hotel chain attribute
             stmt.setBoolean(6, room.isUpgradable());
             stmt.setString(7, room.getDamages());
@@ -121,7 +121,7 @@ public class RoomService {
                         rs.getString("name"),
                         rs.getDouble("price"),
                         rs.getInt("capacity"),
-                        rs.getDouble("area"),
+                        rs.getString("area"),
                         rs.getString("hotel_chain"),
                         rs.getBoolean("upgradable"),
                         rs.getString("damages"),
@@ -153,7 +153,7 @@ public class RoomService {
             stmt.setString(1, room.getName());
             stmt.setDouble(2, room.getPrice());
             stmt.setInt(3, room.getCapacity());
-            stmt.setDouble(4, room.getArea());
+            stmt.setString(4, room.getArea());
             stmt.setString(5, room.getHotelChain());
             stmt.setBoolean(6, room.isUpgradable());
             stmt.setString(7, room.getDamages());

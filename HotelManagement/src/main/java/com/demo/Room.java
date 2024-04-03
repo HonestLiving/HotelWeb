@@ -9,7 +9,7 @@ public class Room {
     private String name;
     private double price;
     private int capacity;
-    private double area; // New attribute: room area
+    private String area; // New attribute: room area
     private String hotelChain; // New attribute: hotel chain
     private boolean upgradable;
     private String damages;
@@ -17,7 +17,7 @@ public class Room {
     private String amenities;
     private String address;
 
-    public Room(int roomNumber, String name, double price, int capacity, double area, String hotelChain, boolean upgradable, String damages, String view, String amenities, String address) {
+    public Room(int roomNumber, String name, double price, int capacity, String area, String hotelChain, boolean upgradable, String damages, String view, String amenities, String address) {
         this.roomNumber = roomNumber;
         this.name = name;
         this.price = price;
@@ -32,7 +32,7 @@ public class Room {
     }
 
     // Getters and Setters
-    public double getArea() {
+    public String getArea() {
         return area;
     }
     public String getHotelChain() {
