@@ -4,11 +4,11 @@
 
 <%
     // Retrieve form parameters
-    int roomNumber = Integer.parseInt(request.getParameter("room_number"));
-    String customerName = request.getParameter("Cname");
+    int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
+    String customerName = request.getParameter("customerName");
     String email = request.getParameter("email");
-    Date checkInDate = Date.valueOf(request.getParameter("in_date"));
-    Date checkOutDate = Date.valueOf(request.getParameter("out_date"));
+    Date checkInDate = Date.valueOf(request.getParameter("checkInDate"));
+    Date checkOutDate = Date.valueOf(request.getParameter("checkOutDate"));
 
     // Create Booking object
     Booking booking = new Booking();
