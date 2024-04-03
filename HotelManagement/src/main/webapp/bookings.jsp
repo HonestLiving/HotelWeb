@@ -6,17 +6,10 @@
 <%
     // Retrieve form parameters
     int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
-    String customerName = request.getParameter("customerName");
-    String email = request.getParameter("email");
-    Date checkInDate = null;
-    Date checkOutDate = null;
-    try {
-        checkInDate = Date.valueOf(request.getParameter("checkInDate"));
-        checkOutDate = Date.valueOf(request.getParameter("checkOutDate"));
-    } catch (IllegalArgumentException e) {
-        out.println("Invalid date format. Please enter dates in yyyy-MM-dd format.");
-        return;
-    }
+     String customerName = request.getParameter("customerName");
+     String email = request.getParameter("email");
+     Date checkInDate = Date.valueOf(request.getParameter("checkInDate"));
+     Date checkOutDate = Date.valueOf(request.getParameter("checkOutDate"));
 
     // Create Booking object
     Booking booking = new Booking();
