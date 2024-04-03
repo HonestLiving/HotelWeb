@@ -23,3 +23,15 @@ VALUES (100002, 'Standard Room', 150.00, 1, 'Toronto', 'Jac Hotels', false, 'Min
 
 INSERT INTO Rooms (room_number, name, price, capacity, area, hotel_chain, upgradable, damages, view, amenities, address)
 VALUES (100003, 'Family Suite', 350.00, 4, 'Markham', 'Bruh Hotels', true, 'None', 'Ocean View', 'Kitchenette, Sofa Bed', 'Address 3');
+
+--Table structure for Bookings
+DROP TABLE IF EXISTS Bookings;
+CREATE TABLE Bookings (
+  room_number serial PRIMARY KEY,
+  Cname varchar(100) NOT NULL,
+  email varchar(100) NOT NULL,
+  in_date DATE,
+  out_date DATE
+);
+
+
