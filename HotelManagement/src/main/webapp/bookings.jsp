@@ -11,11 +11,19 @@
     Date checkInDate = null;
     Date checkOutDate = null;
     try {
-        checkInDate = Date.valueOf(request.getParameter("checkInDate"));
-        checkOutDate = Date.valueOf(request.getParameter("checkOutDate"));
+        // Validate date format
+        String checkInDateString = request.getParameter("checkInDate");
+        String checkOutDateString = request.getParameter("checkOutDate");
+        if (!isValidDateFormat(checkInDateString) || !isValidDateFormat(checkOutDateString)) {
+            errorMessage = "Invalid date format. Please enter dates in yyyy-MM-dd format.";
+        } else {
+            // Parse dates
+            checkInDate = Date.valueOf(checkInDateString);
+            checkOutDate = Date.valueOf(checkOutDateString);
+        }
     } catch (IllegalArgumentException e) {
         out.println("Invalid date format. Please enter dates in yyyy-MM-dd format.");
-        return;
+        return
     }
 
     // Create Booking object
