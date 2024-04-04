@@ -8,6 +8,15 @@ public class Booking {
     private Date in_Date;
     private Date out_Date;
 
+    public Booking (int room_Number, String cName, String email, Date in_Date, Date out_Date) {
+        this.room_Number = room_Number;
+        this.cName = cName;
+        this.email = email;
+        this.in_Date = in_Date;
+        this.out_Date = out_Date;
+      
+    }
+
 
     public Integer getRoomNumber() {
         return room_Number;
