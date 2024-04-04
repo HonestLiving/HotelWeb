@@ -78,5 +78,6 @@
             %>
         </tbody>
     </table>
+   <h3><a href="http://localhost:8080/HotelManagement/allArchives.jsp"><span>Archives</span></a></h3> 
 </body>
 </html>
