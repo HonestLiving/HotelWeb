@@ -78,5 +78,9 @@ CREATE TABLE Bookings (
 INSERT INTO Bookings (room_number, Cname, email, in_date, out_date)
 VALUES (100001, 'Rishi', 'Rishising', '2024-04-05', '2024-04-08');
 
-
 SELECT * FROM Bookings;
+
+--Indexes
+CREATE INDEX RoomsRoomNum ON Rooms(room_number);
+CREATE INDEX BookingsRoomNum ON Bookings(room_number);
+CREATE INDEX BookingsDateRange ON Bookings(in_date, out_date);
