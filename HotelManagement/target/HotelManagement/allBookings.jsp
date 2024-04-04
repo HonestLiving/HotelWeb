@@ -1,8 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.demo.Booking" %>
 <%@ page import="com.demo.allBookings" %>
+<%@ page import="com.demo.BookingStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page errorPage="error.jsp" %>
 <%
     // Instantiate the AllBookings class to access bookings
     allBookings allBookingsObj = new allBookings();
@@ -54,6 +54,8 @@
                 <th>Check-In Date</th>
                 <th>Check-Out Date</th>
                 <th>Hotel</th>
+                <th>Id</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -69,12 +71,24 @@
                             <td><%= booking.getCheckInDate() %></td>
                             <td><%= booking.getCheckOutDate() %></td>
                             <td><%= booking.getHotel() %></td>
+                            <td><%= booking.getId() %></td>
+                            <td>
+                                <form action="BookingStatus" method="post"> 
+                                    <input type="hidden" name="roomId" value="<%= booking.getRoomNumber() %>">
+                                    <select name="status">
+                                        <option value="Booked" <%= booking.getStatus().equals("Booked") ? "selected" : "" %>>Booked</option>
+                                        <option value="Rented" <%= booking.getStatus().equals("Rented") ? "selected" : "" %>>Rented</option>
+                                        <option value="Done" <%= booking.getStatus().equals("Done") ? "selected" : "" %>>Done</option>
+                                    </select>
+                                    <input type="submit" value="Update">
+                                </form>
+                            </td>                            
                         </tr>
             <%      }
                 } else {
             %>
                     <tr>
-                        <td colspan="6">No bookings found</td>
+                        <td colspan="8">No bookings found</td>
                     </tr>
             <%  }
             %>

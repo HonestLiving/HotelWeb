@@ -1,10 +1,13 @@
-com\demo\Archive.class
 com\demo\Booking.class
+com\demo\HotelService.class
+com\demo\BookingStatus.class
 com\demo\RoomService.class
-com\demo\ConnectionDB.class
-com\demo\Employee.class
-com\demo\Room.class
+com\demo\Hotel.class
 com\demo\BookingService.class
 com\demo\EmployeeService.class
 com\demo\allArchives.class
 com\demo\allBookings.class
+com\demo\Archive.class
+com\demo\ConnectionDB.class
+com\demo\Employee.class
+com\demo\Room.class
