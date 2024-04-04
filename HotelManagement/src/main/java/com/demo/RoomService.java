@@ -106,7 +106,7 @@ public class RoomService {
             params.add("%" + hotelChain + "%");
         }
         if (!hotel.isEmpty()) {
-            sql += " AND hotel_chain LIKE ?";
+            sql += " AND hotel LIKE ?";
             params.add("%" + hotel + "%");
         }
         ConnectionDB db = new ConnectionDB();
