@@ -1,14 +1,14 @@
 -- Trigger to prevent booking an unavailable room
-CREATE OR REPLACE FUNCTION prevent_unavailable_room_booking()
+CREATE OR REPLACE FUNCTION preventDoubleBooking()
 RETURNS TRIGGER AS $$
 DECLARE
-    room_available BOOLEAN;
+    roomAvailable BOOLEAN;
 BEGIN
-    SELECT availability INTO room_available
+    SELECT availability INTO roomAvailable
     FROM Rooms
     WHERE room_number = NEW.room_number;
 
-    IF NOT room_available THEN
+    IF NOT roomAvailable THEN
         RAISE EXCEPTION 'Cannot book an unavailable room.';
     END IF;
 
@@ -16,13 +16,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER prevent_unavailable_room_booking
+CREATE TRIGGER preventDoubleBooking
 BEFORE INSERT ON Bookings
 FOR EACH ROW
-EXECUTE FUNCTION prevent_unavailable_room_booking();
+EXECUTE FUNCTION preventDoubleBooking();
 
 -- Trigger to automatically change availability
-CREATE OR REPLACE FUNCTION update_room_availability()
+CREATE OR REPLACE FUNCTION updateAvailability()
 RETURNS TRIGGER AS $$
 BEGIN
     UPDATE Rooms
@@ -33,10 +33,10 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER update_room_availability
+CREATE TRIGGER updateAvailability
 AFTER INSERT ON Bookings
 FOR EACH ROW
-EXECUTE FUNCTION update_room_availability();
+EXECUTE FUNCTION updateAvailability();
 
 -- Table structure for Rooms
 DROP TABLE IF EXISTS Rooms;
@@ -79,7 +79,34 @@ INSERT INTO Bookings (room_number, Cname, email, in_date, out_date)
 VALUES (100001, 'Rishi', 'Rishising', '2024-04-05', '2024-04-08');
 
 SELECT * FROM Bookings;
+--Table Structure for Archive
+DROP TABLE IF EXISTS BookingsArchive;
+CREATE TABLE BookingsArchive (
+    room_number INT NOT NULL,
+    Cname VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    in_date DATE NOT NULL,
+    out_date DATE NOT NULL
+);
 
+-- Insert expired booking into the archive table
+CREATE OR REPLACE FUNCTION archiveBookings()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date)
+    VALUES (OLD.room_number, OLD.Cname, OLD.email, OLD.in_date, OLD.out_date);
+
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER archiveBookings
+BEFORE DELETE ON Bookings
+FOR EACH ROW
+WHEN (OLD.out_date < CURRENT_DATE)
+EXECUTE PROCEDURE archiveBookings();
+
+SELECT * FROM BookingsArchive;
 --Indexes
 CREATE INDEX RoomsRoomNum ON Rooms(room_number);
 CREATE INDEX BookingsRoomNum ON Bookings(room_number);
