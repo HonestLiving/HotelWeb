@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class BookingService {
     public String createBooking(Booking booking) {
         String message = "";
-        String insertBookingQuery = "INSERT INTO Bookings (room_number, Cname, email, in_date, out_date) VALUES (?, ?, ?, ?, ?)";
+        String insertBookingQuery = "INSERT INTO Bookings (room_number, Cname, email, in_date, out_date, hotel) VALUES (?, ?, ?, ?, ?, ?)";
         ConnectionDB db = new ConnectionDB();
 
         try (Connection con = db.getConnection();
@@ -18,6 +18,7 @@ public class BookingService {
             stmt.setString(3, booking.getEmail());
             stmt.setDate(4, booking.getCheckInDate());
             stmt.setDate(5, booking.getCheckOutDate());
+            stmt.setString(6, booking.getHotel());
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {

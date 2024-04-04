@@ -5,11 +5,12 @@ CREATE TABLE Bookings (
   Cname varchar(100) NOT NULL,
   email varchar(100) NOT NULL,
   in_date DATE,
-  out_date DATE
+  out_date DATE,
+  hotel varchar(100) NOT NULL
 );
 
-INSERT INTO Bookings (room_number, Cname, email, in_date, out_date)
-VALUES (100001, 'Rishi', 'Rishising', '2024-04-05', '2024-04-08');
+INSERT INTO Bookings (room_number, Cname, email, in_date, out_date, hotel)
+VALUES (100001, 'Rishi', 'Rishising', '2024-04-05', '2024-04-08', 'Meep Hotel');
 
 SELECT * FROM Bookings;
 
@@ -68,7 +69,7 @@ CREATE TABLE Rooms (
   amenities text,
   address varchar(200) NOT NULL,
   availability BOOLEAN,
-  hotel varchar(100) NOT NULL -- Adding new attribute "Hotel"
+  hotel varchar(100) NOT NULL
 );
 
 -- Records of Rooms
@@ -88,15 +89,16 @@ CREATE TABLE BookingsArchive (
     Cname VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     in_date DATE NOT NULL,
-    out_date DATE NOT NULL
+    out_date DATE NOT NULL,
+    hotel varchar(100) NOT NULL
 );
 
 -- Insert expired booking into the archive table
 CREATE OR REPLACE FUNCTION archiveBookings()
 RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date)
-    VALUES (OLD.room_number, OLD.Cname, OLD.email, OLD.in_date, OLD.out_date);
+    INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date, hotel)
+    VALUES (OLD.room_number, OLD.Cname, OLD.email, OLD.in_date, OLD.out_date, OLD.hotel);
 
     RETURN OLD;
 END;
@@ -110,12 +112,12 @@ EXECUTE PROCEDURE archiveBookings();
 
 SELECT * FROM BookingsArchive;
 
-INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date)
-VALUES (100001, 'Rishi', 'Rishising', '2024-03-10', '2024-03-11');
-INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date)
-VALUES (100001, 'Kevin', 'bruh@gmail.com', '2024-03-11', '2024-03-12');
-INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date)
-VALUES (100001, 'Matthew', 'bruh1@gmail.com', '2024-03-12', '2024-03-13');
+INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date, hotel)
+VALUES (100001, 'Rishi', 'Rishising', '2024-03-10', '2024-03-11', 'Meep Hotel');
+INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date, hotel)
+VALUES (100001, 'Kevin', 'bruh@gmail.com', '2024-03-11', '2024-03-12', 'Minx Hotel');
+INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date, hotel)
+VALUES (100001, 'Matthew', 'bruh1@gmail.com', '2024-03-12', '2024-03-13', 'Lol Hotel');
 
 --Indexes
 CREATE INDEX RoomsRoomNum ON Rooms(room_number);

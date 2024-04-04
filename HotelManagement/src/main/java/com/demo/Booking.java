@@ -7,14 +7,15 @@ public class Booking {
     private String email;
     private Date in_Date;
     private Date out_Date;
+    private String hotel;
 
-    public Booking (int room_Number, String cName, String email, Date in_Date, Date out_Date) {
+    public Booking (int room_Number, String cName, String email, Date in_Date, Date out_Date, String hotel) {
         this.room_Number = room_Number;
         this.cName = cName;
         this.email = email;
         this.in_Date = in_Date;
         this.out_Date = out_Date;
-      
+        this.hotel = hotel;
     }
 
     public Booking () {      
@@ -59,6 +60,14 @@ public class Booking {
 
     public void setCheckOutDate(Date checkOutDate) {
         this.out_Date = checkOutDate;
+    }
+
+    public String getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(String hotel) {
+        this.hotel = hotel;
     }
 
        

@@ -26,7 +26,8 @@ public class allBookings {
                         rs.getString("Cname"),
                         rs.getString("email"),
                         rs.getDate("in_date"),
-                        rs.getDate("out_date")
+                        rs.getDate("out_date"),
+                        rs.getString("hotel")
                 );
                 bookings.add(booking);
             }
