@@ -1,4 +1,4 @@
-<%@ page import="java.util.List" %>
+ <%@ page import="java.util.List" %>
 <%@ page import="com.demo.Room" %>
 <%@ page import="com.demo.RoomService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -89,6 +89,9 @@
         <label for="area">Area:</label>
         <input type="number" id="area" name="area" step="0.01">
         <br>
+        <label for="hotel">Hotel:</label>
+        <input type="text" id="hotel" name="hotel">
+        <br>
         <button type="submit">Search</button>
     </form>
     <table>
@@ -105,6 +108,7 @@
                 <th>View</th>
                 <th>Amenities</th>
                 <th>Address</th>
+                <th>Hotel</th>
             </tr>
         </thead>
         <tbody>
@@ -124,6 +128,7 @@
                         <td><%= room.getView() == null ? "N/A" : room.getView() %></td>
                         <td><%= room.getAmenities() == null ? "N/A" : room.getAmenities() %></td>
                         <td><%= room.getAddress() %></td>
+                        <td><%= room.getHotel() %></td>
                     </tr>
                 <% } %>
             <% } else { %>
