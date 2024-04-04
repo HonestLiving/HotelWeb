@@ -107,6 +107,14 @@ WHEN (OLD.out_date < CURRENT_DATE)
 EXECUTE PROCEDURE archiveBookings();
 
 SELECT * FROM BookingsArchive;
+
+INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date)
+VALUES (100001, 'Rishi', 'Rishising', '2024-03-10', '2024-03-11');
+INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date)
+VALUES (100001, 'Kevin', 'bruh@gmail.com', '2024-03-11', '2024-03-12');
+INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date)
+VALUES (100001, 'Matthew', 'bruh1@gmail.com', '2024-03-12', '2024-03-13');
+
 --Indexes
 CREATE INDEX RoomsRoomNum ON Rooms(room_number);
 CREATE INDEX BookingsRoomNum ON Bookings(room_number);
