@@ -144,7 +144,49 @@ public class RoomService {
         }
     }
 
+    // Method to retrieve data from the AvailableRoomsPerArea view
+    public List<Object[]> getAvailableRoomsPerArea() throws Exception {
+        String sql = "SELECT * FROM AvailableRoomsPerArea";
+        ConnectionDB db = new ConnectionDB();
 
+        try (Connection con = db.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            List<Object[]> data = new ArrayList<>();
+            while (rs.next()) {
+                Object[] row = new Object[2]; // Assuming two columns: area, num_available_rooms
+                row[0] = rs.getString("area");
+                row[1] = rs.getInt("num_available_rooms");
+                data.add(row);
+            }
+            return data;
+        } catch (SQLException e) {
+            throw new Exception("Error fetching available rooms per area: " + e.getMessage());
+        }
+    }
+
+    // Method to retrieve data from the HotelRoomCapacity view
+    public List<Object[]> getAvailableRoomsPerHotel() throws Exception {
+        String sql = "SELECT * FROM AvailableRoomsPerHotel";
+        ConnectionDB db = new ConnectionDB();
+
+        try (Connection con = db.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            List<Object[]> data = new ArrayList<>();
+            while (rs.next()) {
+                Object[] row = new Object[2]; // Assuming two columns: hotel, total_capacity
+                row[0] = rs.getString("hotel");
+                row[1] = rs.getInt("total_capacity");
+                data.add(row);
+            }
+            return data;
+        } catch (SQLException e) {
+            throw new Exception("Error fetching hotel room capacity: " + e.getMessage());
+        }
+    }
 
 
     // Method to update room

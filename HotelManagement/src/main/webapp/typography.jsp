@@ -5,6 +5,8 @@
 <%
     // Instantiate RoomService to access room data
     RoomService roomService = new RoomService();
+    List<Object[]> availableRoomsPerArea = roomService.getAvailableRoomsPerArea();
+    List<Object[]> availableRoomsPerHotel = roomService.getAvailableRoomsPerHotel();
 
     // Retrieve list of rooms
     List<Room> rooms = null;
@@ -142,5 +144,42 @@
             <% } %>
         </tbody>
     </table>
+
+    <h2>Available Rooms Per Area</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>Number of Available Rooms</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (Object[] row : availableRoomsPerArea) { %>
+                        <tr>
+                            <td><%= row[0] %></td>
+                            <td><%= row[1] %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
+            <h2>Hotel Room Capacity</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hotel</th>
+                        <th>Total Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (Object[] row : availableRoomsPerHotel) { %>
+                        <tr>
+                            <td><%= row[0] %></td>
+                            <td><%= row[1] %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
 </body>
 </html>

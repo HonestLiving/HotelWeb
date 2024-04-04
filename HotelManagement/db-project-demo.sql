@@ -124,6 +124,18 @@ CREATE INDEX RoomsRoomNum ON Rooms(room_number);
 CREATE INDEX BookingsRoomNum ON Bookings(room_number);
 CREATE INDEX BookingsDateRange ON Bookings(in_date, out_date);
 
+--Views
+CREATE VIEW AvailableRoomsPerArea AS
+SELECT area, COUNT(*) AS num_available_rooms
+FROM Rooms
+WHERE availability = TRUE
+GROUP BY area;
+
+CREATE VIEW AvailableRoomsPerHotel AS
+SELECT hotel, SUM(capacity) AS total_capacity
+FROM Rooms
+GROUP BY hotel;
+
 SELECT * FROM Rooms WHERE availability=TRUE;
 SELECT * FROM Rooms;
 SELECT * FROM Rooms WHERE availability = TRUE AND WHERE 1 = 1;
