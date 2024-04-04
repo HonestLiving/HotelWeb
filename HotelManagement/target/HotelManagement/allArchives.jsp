@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.demo.allArchives" %>
 <%@ page import="com.demo.Archive" %>
+<%@ page import="com.demo.allArchives" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page errorPage="error.jsp" %>
 <%
@@ -53,6 +53,7 @@
                 <th>Email</th>
                 <th>Check-In Date</th>
                 <th>Check-Out Date</th>
+                <th>Hotel</th>
             </tr>
         </thead>
         <tbody>
@@ -67,12 +68,13 @@
                             <td><%= archive.getEmail() %></td>
                             <td><%= archive.getCheckInDate() %></td>
                             <td><%= archive.getCheckOutDate() %></td>
+                            <td><%= archive.getHotel() %></td>
                         </tr>
             <%      }
                 } else {
             %>
                     <tr>
-                        <td colspan="5">No Archived Bookings found</td>
+                        <td colspan="6">No Archived Bookings found</td>
                     </tr>
             <%  }
             %>

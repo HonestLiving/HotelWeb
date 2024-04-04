@@ -119,7 +119,7 @@
             <% if (rooms != null && !rooms.isEmpty()) { %>
                 <% for (Room room : rooms) { %>
                     <tr>
-                        <td><a href="bookings.jsp?roomNumber=<%= room.getRoomNumber() %>"><%= room.getRoomNumber() %></a></td>
+                        <td><a href="bookings.jsp?roomNumber=<%= room.getRoomNumber() %>&hotel=<%= room.getHotel() %>"><%= room.getRoomNumber() %></a></td>
 
 
                         <td><%= room.getName() %></td>

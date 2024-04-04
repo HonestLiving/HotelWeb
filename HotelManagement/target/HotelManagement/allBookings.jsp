@@ -53,6 +53,7 @@
                 <th>Email</th>
                 <th>Check-In Date</th>
                 <th>Check-Out Date</th>
+                <th>Hotel</th>
             </tr>
         </thead>
         <tbody>
@@ -67,16 +68,18 @@
                             <td><%= booking.getEmail() %></td>
                             <td><%= booking.getCheckInDate() %></td>
                             <td><%= booking.getCheckOutDate() %></td>
+                            <td><%= booking.getHotel() %></td>
                         </tr>
             <%      }
                 } else {
             %>
                     <tr>
-                        <td colspan="5">No bookings found</td>
+                        <td colspan="6">No bookings found</td>
                     </tr>
             <%  }
             %>
         </tbody>
     </table>
+   <h3><a href="http://localhost:8080/HotelManagement/allArchives.jsp"><span>Archives</span></a></h3> 
 </body>
 </html>
