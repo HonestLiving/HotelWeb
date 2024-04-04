@@ -38,9 +38,13 @@
         if (areaParam != null && !areaParam.isEmpty()) {
             area = areaParam;
         }
+        String hotel = request.getParameter("hotel");
+                if (hotel == null) {
+                    hotel = "";
+                }
 
         // Call the searchRooms method with all parameters
-        rooms = roomService.searchRooms(name, minPrice, maxPrice, capacity, area, hotelChain);
+        rooms = roomService.searchRooms(name, minPrice, maxPrice, capacity, area, hotelChain,hotel);
     } catch (Exception e) {
         out.println("Error fetching rooms: " + e.getMessage());
         return;
@@ -89,6 +93,9 @@
         <label for="area">Area:</label>
         <input type="text" id="area" name="area" step="0.01">
         <br>
+        <label for="hotel">Hotel:</label>
+        <input type="text" id="hotel" name="hotel">
+        <br>
         <button type="submit">Search</button>
     </form>
     <table>
@@ -105,6 +112,7 @@
                 <th>View</th>
                 <th>Amenities</th>
                 <th>Address</th>
+                <th>Hotel</th>
             </tr>
         </thead>
         <tbody>
@@ -124,6 +132,7 @@
                         <td><%= room.getView() == null ? "N/A" : room.getView() %></td>
                         <td><%= room.getAmenities() == null ? "N/A" : room.getAmenities() %></td>
                         <td><%= room.getAddress() %></td>
+                        <td><%= room.getHotel() %></td>
                     </tr>
                 <% } %>
             <% } else { %>

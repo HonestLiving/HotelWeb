@@ -30,7 +30,8 @@ public class RoomService {
                         rs.getString("damages"),
                         rs.getString("view"),
                         rs.getString("amenities"),
-                        rs.getString("address")
+                        rs.getString("address"),
+                        rs.getString("hotel")
                 );
                 rooms.add(room);
             }
@@ -79,7 +80,7 @@ public class RoomService {
         return message;
     }
 
-    public List<Room> searchRooms(String name, double minPrice, double maxPrice, int capacity, String area, String hotelChain) throws Exception {
+    public List<Room> searchRooms(String name, double minPrice, double maxPrice, int capacity, String area, String hotelChain, String hotel) throws Exception {
         String sql = "SELECT * FROM Rooms WHERE 1 = 1";
         List<Object> params = new ArrayList<>();
 
@@ -104,6 +105,10 @@ public class RoomService {
             sql += " AND hotel_chain LIKE ?";
             params.add("%" + hotelChain + "%");
         }
+        if (!hotel.isEmpty()) {
+            sql += " AND hotel_chain LIKE ?";
+            params.add("%" + hotel + "%");
+        }
         ConnectionDB db = new ConnectionDB();
         try (Connection con = db.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -127,7 +132,8 @@ public class RoomService {
                         rs.getString("damages"),
                         rs.getString("view"),
                         rs.getString("amenities"),
-                        rs.getString("address")
+                        rs.getString("address"),
+                        rs.getString("hotel")
                 );
                 rooms.add(room);
             }
