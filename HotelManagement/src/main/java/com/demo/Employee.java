@@ -11,6 +11,8 @@ public class Employee {
     private String position;
     private String address;
 
+    //Hang on do I make hotel an attribute for employee
+
     /**
      * Constructor to save employee's data (without id)
      *
