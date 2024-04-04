@@ -1,3 +1,18 @@
+--Table structure for Bookings
+DROP TABLE IF EXISTS Bookings;
+CREATE TABLE Bookings (
+  room_number serial PRIMARY KEY,
+  Cname varchar(100) NOT NULL,
+  email varchar(100) NOT NULL,
+  in_date DATE,
+  out_date DATE
+);
+
+INSERT INTO Bookings (room_number, Cname, email, in_date, out_date)
+VALUES (100001, 'Rishi', 'Rishising', '2024-04-05', '2024-04-08');
+
+SELECT * FROM Bookings;
+
 -- Trigger to prevent booking an unavailable room
 CREATE OR REPLACE FUNCTION preventDoubleBooking()
 RETURNS TRIGGER AS $$
@@ -65,20 +80,6 @@ VALUES (100002, 'Standard Room', 150.00, 1, 'Toronto', 'Jac Hotels', false, 'Min
 INSERT INTO Rooms (room_number, name, price, capacity, area, hotel_chain, upgradable, damages, view, amenities, address, availability)
 VALUES (100003, 'Family Suite', 350.00, 4, 'Markham', 'Bruh Hotels', true, 'None', 'Ocean View', 'Kitchenette, Sofa Bed', 'Address 3', TRUE);
 
---Table structure for Bookings
-DROP TABLE IF EXISTS Bookings;
-CREATE TABLE Bookings (
-  room_number serial PRIMARY KEY,
-  Cname varchar(100) NOT NULL,
-  email varchar(100) NOT NULL,
-  in_date DATE,
-  out_date DATE
-);
-
-INSERT INTO Bookings (room_number, Cname, email, in_date, out_date)
-VALUES (100001, 'Rishi', 'Rishising', '2024-04-05', '2024-04-08');
-
-SELECT * FROM Bookings;
 --Table Structure for Archive
 DROP TABLE IF EXISTS BookingsArchive;
 CREATE TABLE BookingsArchive (
