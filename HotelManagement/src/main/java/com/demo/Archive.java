@@ -9,14 +9,16 @@ public class Archive {
     private Date in_Date;
     private Date out_Date;
     private String hotel;
+    private String id;
 
-    public Archive (int room_Number, String cName, String email, Date in_Date, Date out_Date, String hotel) {
+    public Archive (int room_Number, String cName, String email, Date in_Date, Date out_Date, String hotel, String id) {
         this.room_Number = room_Number;
         this.cName = cName;
         this.email = email;
         this.in_Date = in_Date;
         this.out_Date = out_Date;
         this.hotel = hotel;
+        this.id = id;
     }
 
     public Archive () {
@@ -67,9 +69,9 @@ public class Archive {
         return hotel;
     }
 
-    public void setHotel(String hotel) {
-        this.hotel = hotel;
-    }
+    public void setHotel(String hotel) { this.hotel = hotel; }
+    public String getId () { return id; }
+    public void setId(String id) {this.id = id; }
 
 
 }

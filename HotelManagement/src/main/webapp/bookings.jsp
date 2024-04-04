@@ -14,6 +14,7 @@
         String checkInDateStr = request.getParameter("checkInDate");
         String checkOutDateStr = request.getParameter("checkOutDate");
         String hotel = request.getParameter("hotel");
+        String id = request.getParameter("id");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date checkInDate = null;
@@ -32,7 +33,7 @@
         }
 
         // Create Booking object
-        Booking booking = new Booking(roomNumber, customerName, email, checkInDate, checkOutDate, hotel);
+        Booking booking = new Booking(roomNumber, customerName, email, checkInDate, checkOutDate, hotel, id);
 
         // Insert booking into the database
         BookingService bookingService = new BookingService();
@@ -67,6 +68,9 @@
         <br>
         <label for="hotel">Hotel:</label>
         <input type="text" id="hotel" name="hotel" value="<%= request.getParameter("hotel")%>">
+        <br>
+        <label for="id">Id:</label>
+        <input type="text" id="id" name="id">
         <br>
         <button type="submit">Submit Booking</button>
     </form>

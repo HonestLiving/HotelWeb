@@ -54,6 +54,7 @@
                 <th>Check-In Date</th>
                 <th>Check-Out Date</th>
                 <th>Hotel</th>
+                <th>Id</th>
             </tr>
         </thead>
         <tbody>
@@ -69,12 +70,13 @@
                             <td><%= booking.getCheckInDate() %></td>
                             <td><%= booking.getCheckOutDate() %></td>
                             <td><%= booking.getHotel() %></td>
+                            <td><%= booking.getId() %></td>
                         </tr>
             <%      }
                 } else {
             %>
                     <tr>
-                        <td colspan="6">No bookings found</td>
+                        <td colspan="7">No bookings found</td>
                     </tr>
             <%  }
             %>
