@@ -1,3 +1,43 @@
+-- Trigger to prevent booking an unavailable room
+CREATE OR REPLACE FUNCTION prevent_unavailable_room_booking()
+RETURNS TRIGGER AS $$
+DECLARE
+    room_available BOOLEAN;
+BEGIN
+    SELECT availability INTO room_available
+    FROM Rooms
+    WHERE room_number = NEW.room_number;
+
+    IF NOT room_available THEN
+        RAISE EXCEPTION 'Cannot book an unavailable room.';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER prevent_unavailable_room_booking
+BEFORE INSERT ON Bookings
+FOR EACH ROW
+EXECUTE FUNCTION prevent_unavailable_room_booking();
+
+-- Trigger to automatically change availability
+CREATE OR REPLACE FUNCTION update_room_availability()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Rooms
+    SET availability = FALSE
+    WHERE room_number = NEW.room_number;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_room_availability
+AFTER INSERT ON Bookings
+FOR EACH ROW
+EXECUTE FUNCTION update_room_availability();
+
 -- Table structure for Rooms
 DROP TABLE IF EXISTS Rooms;
 CREATE TABLE Rooms (
