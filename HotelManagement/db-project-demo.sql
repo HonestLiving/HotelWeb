@@ -77,7 +77,7 @@ INSERT INTO Rooms (room_number, name, price, capacity, area, hotel_chain, upgrad
 VALUES (100001, 'Luxury Suite', 500.00, 2, 'Toronto', 'Jac Hotels', true, 'None', 'City View', 'Mini Bar, Jacuzzi', 'Address 1', TRUE, 'Meep Hotel');
 
 INSERT INTO Rooms (room_number, name, price, capacity, area, hotel_chain, upgradable, damages, view, amenities, address, availability, hotel)
-VALUES (100002, 'Standard Room', 150.00, 1, 'Toronto', 'Jac Hotels', false, 'Minor scratches on the wall', 'Courtyard View', 'TV, Wi-Fi', 'Address 2', TRUE, 'Minx Hotel');
+VALUES (100002, 'Standard Room', 150.00, 1, 'Toronto', 'Jac Hotels', false, 'Minor scratches on the wall', 'Courtyard View', 'TV, Wi-Fi', 'Address 2', FALSE, 'Minx Hotel');
 
 INSERT INTO Rooms (room_number, name, price, capacity, area, hotel_chain, upgradable, damages, view, amenities, address, availability, hotel)
 VALUES (100003, 'Family Suite', 350.00, 4, 'Markham', 'Bruh Hotels', true, 'None', 'Ocean View', 'Kitchenette, Sofa Bed', 'Address 3', TRUE, 'Lol Hotel');
@@ -123,3 +123,7 @@ VALUES (100001, 'Matthew', 'bruh1@gmail.com', '2024-03-12', '2024-03-13', 'Lol H
 CREATE INDEX RoomsRoomNum ON Rooms(room_number);
 CREATE INDEX BookingsRoomNum ON Bookings(room_number);
 CREATE INDEX BookingsDateRange ON Bookings(in_date, out_date);
+
+SELECT * FROM Rooms WHERE availability=TRUE;
+SELECT * FROM Rooms;
+SELECT * FROM Rooms WHERE availability = TRUE AND WHERE 1 = 1;
