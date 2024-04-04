@@ -87,7 +87,7 @@
         <input type="number" id="capacity" name="capacity">
         <br>
         <label for="area">Area:</label>
-        <input type="number" id="area" name="area" step="0.01">
+        <input type="text" id="area" name="area" step="0.01">
         <br>
         <button type="submit">Search</button>
     </form>
