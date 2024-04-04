@@ -9,8 +9,9 @@ public class Booking {
     private Date out_Date;
     private String hotel;
     private String id;
+    private String status;
 
-    public Booking (int room_Number, String cName, String email, Date in_Date, Date out_Date, String hotel, String id) {
+    public Booking (int room_Number, String cName, String email, Date in_Date, Date out_Date, String hotel, String id, String status) {
         this.room_Number = room_Number;
         this.cName = cName;
         this.email = email;
@@ -18,6 +19,7 @@ public class Booking {
         this.out_Date = out_Date;
         this.hotel = hotel;
         this.id = id;
+        this.status = status;
     }
 
     public Booking () {      
@@ -71,6 +73,8 @@ public class Booking {
     public void setHotel(String hotel) { this.hotel = hotel; }
     public String getId () { return id; }
     public void setId(String id) {this.id = id; }
+    public String getStatus () { return status; }
+    public void setStatus(String status) {this.status = status; }
 
        
 }

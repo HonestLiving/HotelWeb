@@ -10,7 +10,7 @@ public class RoomService {
 
     // Method to get all rooms from database
     public List<Room> getRooms() throws Exception {
-        String sql = "SELECT * FROM Rooms";
+        String sql = "SELECT * FROM Rooms WHERE availability=TRUE";
         ConnectionDB db = new ConnectionDB();
         List<Room> rooms = new ArrayList<>();
 
@@ -81,7 +81,7 @@ public class RoomService {
     }
 
     public List<Room> searchRooms(String name, double minPrice, double maxPrice, int capacity, String area, String hotelChain, String hotel) throws Exception {
-        String sql = "SELECT * FROM Rooms WHERE 1 = 1";
+        String sql = "SELECT * FROM Rooms WHERE availability=TRUE AND 1 = 1";
         List<Object> params = new ArrayList<>();
 
         if (!name.isEmpty()) {
