@@ -9,7 +9,6 @@ import java.util.List;
 
 public class EmployeeService {
 
-    // Method to get all employees from database
     public List<Employee> getEmployees() throws Exception {
         String sql = "SELECT * FROM employees";
         ConnectionDB db = new ConnectionDB();

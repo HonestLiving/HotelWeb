@@ -25,7 +25,6 @@ public class Booking {
     public Booking () {      
     }
 
-
     public Integer getRoomNumber() {
         return room_Number;
     }
