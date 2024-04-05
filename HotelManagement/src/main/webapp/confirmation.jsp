@@ -6,6 +6,5 @@
 <body>
     <h2>Booking Confirmation</h2>
     <!--<p><%= request.getParameter("message") %></p>-->
-
 </body>
 </html>

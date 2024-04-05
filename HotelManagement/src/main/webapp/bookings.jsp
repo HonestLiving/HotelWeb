@@ -32,12 +32,9 @@
         }
 
         Booking booking = new Booking(roomNumber, customerName, email, checkInDate, checkOutDate, hotel, id, status);
-
         BookingService bookingService = new BookingService();
         String message = bookingService.createBooking(booking);
         out.println("<p>" + message + "</p>");
-
-
         response.sendRedirect("confirmation.jsp?message=" + message);
     }
 %>

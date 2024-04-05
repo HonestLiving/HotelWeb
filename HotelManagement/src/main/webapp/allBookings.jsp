@@ -6,18 +6,16 @@
 <%
 
     allBookings allBookingsObj = new allBookings();
-
     List<Booking> bookings = null;
 
     try {
         bookings = allBookingsObj.getAllBookings();
-
-
         request.setAttribute("Bookings", bookings);
     } catch (RuntimeException e) {
 
         e.printStackTrace();
         throw new RuntimeException("Error fetching bookings: " + e.getMessage());
+
     }
 %>
 <html>

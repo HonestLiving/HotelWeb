@@ -1,3 +1,4 @@
+DROP TYPE IF EXISTS Booking_status CASCADE;
 CREATE TYPE Booking_status AS ENUM ('Booked', 'Rented', 'Done');
 
 --Table structure for Bookings

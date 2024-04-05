@@ -6,18 +6,18 @@
 <%
 
     allArchives allArchivesObj = new allArchives();
-
     List<Archive> archives = null; // Initialize the list outside the try-catch block
 
     try {
 
         archives = allArchivesObj.getAllArchives();
-
         request.setAttribute("Archives", archives);
+
     } catch (RuntimeException e) {
 
         e.printStackTrace(); // Log the exception for debugging
         throw new RuntimeException("Error fetching archives: " + e.getMessage());
+
     }
 %>
 <html>
