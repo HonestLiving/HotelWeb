@@ -8,7 +8,6 @@ import java.util.List;
 
 public class RoomService {
 
-    // Method to get all rooms from database
     public List<Room> getRooms() throws Exception {
         String sql = "SELECT * FROM Rooms WHERE availability=TRUE";
         ConnectionDB db = new ConnectionDB();
@@ -24,8 +23,8 @@ public class RoomService {
                         rs.getString("name"),
                         rs.getDouble("price"),
                         rs.getInt("capacity"),
-                        rs.getString("area"), // Added area attribute
-                        rs.getString("hotel_chain"), // Added hotel chain attribute
+                        rs.getString("area"),
+                        rs.getString("hotel_chain"),
                         rs.getBoolean("upgradable"),
                         rs.getString("damages"),
                         rs.getString("view"),
@@ -46,7 +45,6 @@ public class RoomService {
         }
     }
 
-    // Method to create a room in the database
     public String createRoom(Room room) throws Exception {
         String message = "";
         String insertRoomQuery = "INSERT INTO Rooms (name, price, capacity, area, hotel_chain, upgradable, damages, view, amenities, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -58,8 +56,8 @@ public class RoomService {
             stmt.setString(1, room.getName());
             stmt.setDouble(2, room.getPrice());
             stmt.setInt(3, room.getCapacity());
-            stmt.setString(4, room.getArea()); // Added area attribute
-            stmt.setString(5, room.getHotelChain()); // Added hotel chain attribute
+            stmt.setString(4, room.getArea());
+            stmt.setString(5, room.getHotelChain());
             stmt.setBoolean(6, room.isUpgradable());
             stmt.setString(7, room.getDamages());
             stmt.setString(8, room.getView());
@@ -144,7 +142,6 @@ public class RoomService {
         }
     }
 
-    // Method to retrieve data from the AvailableRoomsPerArea view
     public List<Object[]> getAvailableRoomsPerArea() throws Exception {
         String sql = "SELECT * FROM AvailableRoomsPerArea";
         ConnectionDB db = new ConnectionDB();
@@ -155,7 +152,7 @@ public class RoomService {
 
             List<Object[]> data = new ArrayList<>();
             while (rs.next()) {
-                Object[] row = new Object[2]; // Assuming two columns: area, num_available_rooms
+                Object[] row = new Object[2];
                 row[0] = rs.getString("area");
                 row[1] = rs.getInt("num_available_rooms");
                 data.add(row);
@@ -166,7 +163,6 @@ public class RoomService {
         }
     }
 
-    // Method to retrieve data from the HotelRoomCapacity view
     public List<Object[]> getAvailableRoomsPerHotel() throws Exception {
         String sql = "SELECT * FROM AvailableRoomsPerHotel";
         ConnectionDB db = new ConnectionDB();
@@ -177,7 +173,7 @@ public class RoomService {
 
             List<Object[]> data = new ArrayList<>();
             while (rs.next()) {
-                Object[] row = new Object[2]; // Assuming two columns: hotel, total_capacity
+                Object[] row = new Object[2];
                 row[0] = rs.getString("hotel");
                 row[1] = rs.getInt("total_capacity");
                 data.add(row);
@@ -188,7 +184,6 @@ public class RoomService {
         }
     }
 
-    // Method to update room
     public String updateRoom(Room room) throws Exception {
         String message = "";
         String updateRoomQuery = "UPDATE Rooms SET name=?, price=?, capacity=?, area=?, hotel_chain=?, upgradable=?, damages=?, view=?, amenities=?, address=? WHERE room_number=?";

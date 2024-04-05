@@ -9,8 +9,8 @@ public class Room {
     private String name;
     private double price;
     private int capacity;
-    private String area; // New attribute: room area
-    private String hotelChain; // New attribute: hotel chain
+    private String area;
+    private String hotelChain;
     private boolean upgradable;
     private String damages;
     private String view;

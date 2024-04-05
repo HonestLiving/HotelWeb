@@ -12,9 +12,7 @@ public class BookingStatus {
         String updateQuery = "";
 
         try {
-            // Attempt to establish a connection and execute the update query
             try (Connection con = db.getConnection()) {
-                // Determine the appropriate SQL query based on the selected status
                 switch (status) {
                     case "Booked":
                         updateQuery = "UPDATE Bookings SET status = 'Booked' WHERE room_number = ?";
@@ -28,11 +26,9 @@ public class BookingStatus {
                         archiveBooking(con, roomNumber);
                         break;
                     default:
-                        // Handle invalid status
                         return "Invalid status";
                 }
 
-                // Execute the update query
                 try (PreparedStatement stmt = con.prepareStatement(updateQuery)) {
                     stmt.setInt(1, roomNumber);
                     int rowsAffected = stmt.executeUpdate();
@@ -43,11 +39,9 @@ public class BookingStatus {
                     }
                 }
             } catch (SQLException e) {
-                // Handle SQL exceptions
                 message = "Error while updating status: " + e.getMessage();
             }
         } catch (Exception e) {
-            // Handle any other exceptions
             message = "Error: " + e.getMessage();
         }
 
@@ -64,15 +58,13 @@ public class BookingStatus {
     }
 
     private void archiveBooking(Connection con, int roomNumber) throws SQLException {
-        // Insert data into the archive table
         String insertQuery = "INSERT INTO BookingsArchive (room_number, Cname, email, in_date, out_date, hotel, id) " +
                 "SELECT room_number, Cname, email, in_date, out_date, hotel, id FROM Bookings WHERE room_number = ?";
         try (PreparedStatement insertStmt = con.prepareStatement(insertQuery)) {
             insertStmt.setInt(1, roomNumber);
             insertStmt.executeUpdate();
         }
-    
-        // Delete data from the original table
+
         String deleteQuery = "DELETE FROM Bookings WHERE room_number = ?";
         try (PreparedStatement deleteStmt = con.prepareStatement(deleteQuery)) {
             deleteStmt.setInt(1, roomNumber);

@@ -24,7 +24,6 @@ public class Archive {
     public Archive () {
     }
 
-
     public Integer getRoomNumber() {
         return room_Number;
     }
@@ -72,7 +71,6 @@ public class Archive {
     public void setHotel(String hotel) { this.hotel = hotel; }
     public String getId () { return id; }
     public void setId(String id) {this.id = id; }
-
 
 }
 

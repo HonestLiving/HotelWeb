@@ -9,7 +9,6 @@ import java.util.List;
 
 public class allBookings {
 
-    // Method to retrieve all bookings from the database
     public List<Booking> getAllBookings() {
         String sql = "SELECT * FROM Bookings";
         ConnectionDB db = new ConnectionDB();
@@ -36,16 +35,12 @@ public class allBookings {
 
             rs.close();
             stmt.close();
-            con.close(); // Close the connection
+            con.close();
         } catch (SQLException e) {
-            // Log the exception or handle it appropriately
             e.printStackTrace();
-            // Rethrow it as a runtime exception to maintain the method signature
             throw new RuntimeException("Error fetching bookings: " + e.getMessage());
         } catch (Exception e) {
-            // Handle other exceptions, if any
             e.printStackTrace();
-            // Rethrow it as a runtime exception
             throw new RuntimeException("Error: " + e.getMessage());
         }
 

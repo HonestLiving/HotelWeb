@@ -9,7 +9,6 @@ import java.util.List;
 
 public class allArchives {
 
-    // Method to retrieve all bookings from the database
     public List<Archive> getAllArchives() {
         String sql = "SELECT * FROM BookingsArchive;";
         ConnectionDB db = new ConnectionDB();
@@ -35,16 +34,12 @@ public class allArchives {
 
             rs.close();
             stmt.close();
-            con.close(); // Close the connection
+            con.close();
         } catch (SQLException e) {
-            // Log the exception or handle it appropriately
             e.printStackTrace();
-            // Rethrow it as a runtime exception to maintain the method signature
             throw new RuntimeException("Error fetching archived bookings: " + e.getMessage());
         } catch (Exception e) {
-            // Handle other exceptions, if any
             e.printStackTrace();
-            // Rethrow it as a runtime exception
             throw new RuntimeException("Error: " + e.getMessage());
         }
 

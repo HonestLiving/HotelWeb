@@ -8,7 +8,6 @@ import java.util.List;
 
 public class HotelService {
 
-    // Method to get all hotels from database
     public List<Hotel> getHotels() throws Exception {
         String sql = "SELECT * FROM hotels";
         ConnectionDB db = new ConnectionDB();
@@ -40,7 +39,6 @@ public class HotelService {
         }
     }
 
-    // Method to create a hotel in the database
     public String createHotel(Hotel hotel) throws Exception {
         String message = "";
         Connection con = null;
@@ -78,7 +76,6 @@ public class HotelService {
         return message;
     }
 
-    // Method to update hotel
     public String updateHotel(Hotel hotel) throws Exception {
         Connection con = null;
         String message = "";
