@@ -20,7 +20,6 @@ public class HotelService {
 
             while (rs.next()) {
                 Hotel hotel = new Hotel(
-                        rs.getString("hotel_name"),
                         rs.getString("address"),
                         rs.getString("email"),
                         rs.getString("phone_number"),
@@ -52,11 +51,10 @@ public class HotelService {
             con = db.getConnection();
             PreparedStatement stmt = con.prepareStatement(insertHotelQuery);
 
-            stmt.setString(1, hotel.getHotel_name());
-            stmt.setString(2, hotel.getAddress());
-            stmt.setString(3, hotel.getEmail());
-            stmt.setString(4, hotel.getPhoneNumber());
-            stmt.setInt(5, hotel.getRating());
+            stmt.setString(1, hotel.getAddress());
+            stmt.setString(2, hotel.getEmail());
+            stmt.setString(3, hotel.getPhoneNumber());
+            stmt.setInt(4, hotel.getRating());
 
             int output = stmt.executeUpdate();
 

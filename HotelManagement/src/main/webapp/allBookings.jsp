@@ -73,16 +73,16 @@
                             <td><%= booking.getHotel() %></td>
                             <td><%= booking.getId() %></td>
                             <td>
-                                <form action="BookingStatus" method="post"> 
-                                    <input type="hidden" name="roomId" value="<%= booking.getRoomNumber() %>">
-                                    <select name="status">
+                                <form action="updateStatus.jsp" method="post">
+                                    <input type="hidden" name="roomNumber" value="<%= booking.getRoomNumber() %>">
+                                    <select name="status" onchange="this.form.submit()">
                                         <option value="Booked" <%= booking.getStatus().equals("Booked") ? "selected" : "" %>>Booked</option>
                                         <option value="Rented" <%= booking.getStatus().equals("Rented") ? "selected" : "" %>>Rented</option>
                                         <option value="Done" <%= booking.getStatus().equals("Done") ? "selected" : "" %>>Done</option>
                                     </select>
-                                    <input type="submit" value="Update">
                                 </form>
-                            </td>                            
+                            </td>
+                                                
                         </tr>
             <%      }
                 } else {
