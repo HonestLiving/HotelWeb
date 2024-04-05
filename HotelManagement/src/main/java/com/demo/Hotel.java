@@ -4,7 +4,7 @@ package com.demo;
  * Hotel class to store hotel data
  */
 public class Hotel {
-
+    private String hotel_name;
     private String address;
     private String email;
     private String phoneNumber;
@@ -18,7 +18,8 @@ public class Hotel {
      * @param phoneNumber phone number of hotel
      * @param rating      rating of hotel
      */
-    public Hotel(String address, String email, String phoneNumber, int rating) {
+    public Hotel(String hotel_name, String address, String email, String phoneNumber, int rating) {
+        this.hotel_name = hotel_name;
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -26,6 +27,9 @@ public class Hotel {
     }
 
     //getters
+    public String getHotel_name() {
+        return hotel_name;
+    }
     public String getAddress() {
         return address;
     }

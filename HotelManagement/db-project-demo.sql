@@ -146,6 +146,66 @@ SELECT hotel, SUM(capacity) AS total_capacity
 FROM Rooms
 GROUP BY hotel;
 
+-- Table Structure for Hotels
+DROP TABLE IF EXISTS Hotels;
+CREATE TABLE Hotels (
+    hotel_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    rating INT
+);
+-- Inserting example data into Hotels table with a rating of 3 for each hotel
+INSERT INTO hotels (hotel_name, email, address, phone_number, rating)
+VALUES
+    ('Qol Hotel', 'qolhotel@example.com', '123 Beach Ave, Markham', '+1234567890', 1),
+    ('Pol Hotel', 'polhotel@example.com', '111 Hilltop Rd, Markham', '+1234567890', 3),
+    ('Lol Hotel', 'lolhotel@example.com', '123 River Rd, Markham', '+1234567890',4),
+    ('Dol Hotel', 'dolhotel@example.com', '111 Lakeshore Dr, Markham', '+1234567890', 3),
+    ('Jol Hotel', 'jolhotel@example.com', '123 Riverside Dr, Markham', '+1234567890', 3),
+    ('Kol Hotel', 'kolhotel@example.com', '111 Skyline Ave, Markham', '+1234567890', 5),
+    ('Mol Hotel', 'molhotel@example.com', '123 Mountain Ave, Markham', '+1234567890', 3),
+    ('Jax Hotel', 'jaxhotel@example.com', '65 Jax St', '+1234567890', 3),
+    ('Lmao Hotel', 'lmaohotel@example.com', '55 Lmao St', '+1234567890', 2),
+    ('Meep Hotel', 'meephotel@example.com', '65 Meep St', '+1234567890', 3),
+    ('Troll Hotel', 'trollhotel@example.com', '65 Troll St', '+1234567890', 1),
+    ('Bingus Hotel', 'bingushotel@example.com', '55 Bingus St', '+1234567890', 3),
+    ('Deep Hotel', 'deephotel@example.com', '65 Deep St', '+1234567890', 2),
+    ('Teep Hotel', 'teephotel@example.com', '55 Teep St', '+1234567890', 3),
+    ('Ooga Hotel', 'oogahotel@example.com', '55 Ooga St', '+1234567890', 4),
+    ('Toga Hotel', 'togahotel@example.com', '55 Toga St, Toronto', '+1234567890', 1),
+    ('Mulu Hotel', 'muluhotel@example.com', '55 Mulu St, Toronto', '+1234567890', 1),
+    ('Julu Hotel', 'juluhotel@example.com', '55 Julu St, Toronto', '+1234567890', 2),
+    ('Hulu Hotel', 'huluhotel@example.com', '55 Hulu St, Toronto', '+1234567890', 5),
+    ('Kulu Hotel', 'kuluhotel@example.com', '55 Kulu St, Toronto', '+1234567890', 3),
+    ('Krollo Hotel', 'krollohotel@example.com', '55 Krollo St, Toronto', '+1234567890', 2),
+    ('Olu Hotel', 'oluhotel@example.com', '55 Olu St, Toronto', '+1234567890', 1),
+    ('Polu Hotel', 'poluhotel@example.com', '55 Polu St, Toronto', '+1234567890', 4),
+    ('Chingus Hotel', 'chingushotel@example.com', '55 Chingus St, Toronto', '+1234567890', 4),
+    ('Linugs Hotel', 'linugshotel@example.com', '55 Linugs St, Toronto', '+1234567890', 5),
+    ('Minugs Hotel', 'minugshotel@example.com', '55 Minugs St, Toronto', '+1234567890', 5),
+    ('Fringus Hotel', 'fringushotel@example.com', '55 Fringus St, Toronto', '+1234567890', 5),
+    ('Yingus Hotel', 'yingushotel@example.com', '55 Yingus St, Toronto', '+1234567890', 1),
+    ('Yongus Hotel', 'yongushotel@example.com', '55 Yongus St, Toronto', '+1234567890', 1),
+    ('Kingus Hotel', 'kingushotel@example.com', '55 Kingus St, Toronto', '+1234567890', 1),
+    ('Oogus Hotel', 'oogushotel@example.com', '55 Oogus St, Toronto', '+1234567890', 2),
+    ('Ayaya Hotel', 'ayayahotel@example.com', '55 Ayaya St, Toronto', '+1234567890', 3),
+    ('Dayaya Hotel', 'dayayahotel@example.com', '55 Dayaya St, Toronto', '+1234567890', 3),
+    ('Gogogo Hotel', 'gogogohotel@example.com', '55 Gogogo St, Toronto', '+1234567890', 4),
+    ('Dingdingding Hotel', 'dingdingdinghotel@example.com', '55 Dingdingding St, Toronto', '+1234567890', 3),
+    ('Mingming Hotel', 'mingminghotel@example.com', '55 Mingming St, Toronto', '+1234567890', 3),
+    ('Ringring Hotel', 'ringringhotel@example.com', '55 Ringring St, Toronto', '+1234567890', 5),
+    ('Hohoho Hotel', 'hohohohotel@example.com', '55 Hohoho St, Toronto', '+1234567890', 3),
+    ('Jojojo Hotel', 'jojojohotel@example.com', '55 Jojojo St, Toronto', '+1234567890', 3),
+    ('Goo Hotel', 'goohotel@example.com', '55 Goo St, Toronto', '+1234567890', 1),
+    ('More Goo Hotel', 'moregoohotel@example.com', '55 More Goo St, Toronto', '+1234567890', 2),
+    ('Even More Goo Hotel', 'evenmoregoohotel@example.com', '55 Even More Goo St, Toronto', '+1234567890', 3),
+    ('Still Goo Hotel', 'stillgoohotel@example.com', '55 Still Goo St, Toronto', '+1234567890', 3),
+    ('Wow More Goo Hotel', 'wowmoregoohotel@example.com', '55 Wow More Goo St, Toronto', '+1234567890', 3),
+    ('Dang Its Goo Hotel', 'dangitsgoohotel@example.com', '55 Dang Its Goo St, Toronto', '+1234567890', 3),
+    ('Wow Goo Hotel', 'wowgoohotel@example.com', '55 Wow Goo St, Toronto', '+1234567890', 3),
+    ('Welp Goo Hotel', 'welpgoohotel@example.com', '55 Welp Goo St, Toronto', '+1234567890', 4);
+
 
 --Bruh Hotels
 -- Qol Hotel
