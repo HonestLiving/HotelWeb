@@ -8,7 +8,6 @@ import java.util.List;
 
 public class RoomService {
 
-    // Method to get all rooms from database
     public List<Room> getRooms() throws Exception {
         String sql = "SELECT * FROM Rooms WHERE availability=TRUE";
         ConnectionDB db = new ConnectionDB();
@@ -46,7 +45,6 @@ public class RoomService {
         }
     }
 
-    // Method to create a room in the database
     public String createRoom(Room room) throws Exception {
         String message = "";
         String insertRoomQuery = "INSERT INTO Rooms (name, price, capacity, area, hotel_chain, upgradable, damages, view, amenities, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -144,7 +142,6 @@ public class RoomService {
         }
     }
 
-    // Method to retrieve data from the AvailableRoomsPerArea view
     public List<Object[]> getAvailableRoomsPerArea() throws Exception {
         String sql = "SELECT * FROM AvailableRoomsPerArea";
         ConnectionDB db = new ConnectionDB();
@@ -166,7 +163,6 @@ public class RoomService {
         }
     }
 
-    // Method to retrieve data from the HotelRoomCapacity view
     public List<Object[]> getAvailableRoomsPerHotel() throws Exception {
         String sql = "SELECT * FROM AvailableRoomsPerHotel";
         ConnectionDB db = new ConnectionDB();
@@ -188,7 +184,6 @@ public class RoomService {
         }
     }
 
-    // Method to update room
     public String updateRoom(Room room) throws Exception {
         String message = "";
         String updateRoomQuery = "UPDATE Rooms SET name=?, price=?, capacity=?, area=?, hotel_chain=?, upgradable=?, damages=?, view=?, amenities=?, address=? WHERE room_number=?";

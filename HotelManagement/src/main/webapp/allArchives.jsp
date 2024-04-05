@@ -4,19 +4,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page errorPage="error.jsp" %>
 <%
-    // Instantiate the AllArchives class to access bookings
+
     allArchives allArchivesObj = new allArchives();
 
     List<Archive> archives = null; // Initialize the list outside the try-catch block
 
     try {
-        // Retrieve all archived bookings from the database
+
         archives = allArchivesObj.getAllArchives();
 
-        // Set the list of archived bookings as an attribute in the request
         request.setAttribute("Archives", archives);
     } catch (RuntimeException e) {
-        // Handle runtime exception
+
         e.printStackTrace(); // Log the exception for debugging
         throw new RuntimeException("Error fetching archives: " + e.getMessage());
     }

@@ -9,8 +9,8 @@ public class Room {
     private String name;
     private double price;
     private int capacity;
-    private String area; // New attribute: room area
-    private String hotelChain; // New attribute: hotel chain
+    private String area;
+    private String hotelChain;
     private boolean upgradable;
     private String damages;
     private String view;
@@ -33,7 +33,6 @@ public class Room {
         this.hotel = hotel;
     }
 
-    // Getters and Setters
     public String getArea() {
         return area;
     }
@@ -115,18 +114,4 @@ public class Room {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "<ul>"
-                + "<li>Room Number: " + roomNumber + "</li>"
-                + "<li>Name: " + name + "</li>"
-                + "<li>Price: $" + price + "</li>"
-                + "<li>Capacity: " + capacity + "</li>"
-                + "<li>Upgradable: " + (upgradable ? "Yes" : "No") + "</li>"
-                + "<li>Damages: " + (damages == null ? "None" : damages) + "</li>"
-                + "<li>View: " + (view == null ? "N/A" : view) + "</li>"
-                + "<li>Amenities: " + (amenities == null ? "N/A" : amenities) + "</li>"
-                + "<li>Address: " + address + "</li>"
-                + "</ul>";
-    }
 }

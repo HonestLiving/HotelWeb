@@ -11,15 +11,6 @@ public class Hotel {
     private String phoneNumber;
     private int rating;
 
-    /**
-     * Constructor to save hotel's data
-     *
-     * @param address     address of hotel
-     * @param email       email of hotel
-     * @param phoneNumber phone number of hotel
-     * @param rating      rating of hotel
-     */
-
     public Hotel(String hotel_name, String address, String email, String phoneNumber, int rating){
             this.hotel_name = hotel_name;
             this.address = address;
@@ -28,7 +19,6 @@ public class Hotel {
             this.rating = rating;
         }
 
-        //getters
         public String getHotel_name() {
             return hotel_name;
         }
@@ -48,7 +38,6 @@ public class Hotel {
             return rating;
         }
 
-        //setters
         public void setAddress (String address){
             this.address = address;
         }
@@ -64,7 +53,6 @@ public class Hotel {
         public void setRating ( int rating){
             this.rating = rating;
         }
-
 
     }
 

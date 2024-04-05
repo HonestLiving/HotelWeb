@@ -85,13 +85,5 @@ public class Employee {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "<ul>"
-                + "<li>Name: " + name + "</li>"
-                + "<li>SIN: " + sin + "</li>"
-                + "<li>Position: " + position + "</li>"
-                + "<li>Address: " + address + "</li>"
-                + "</ul>";
-    }
+
 }

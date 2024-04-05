@@ -4,10 +4,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    // Instantiate EmployeeService to access employee data
     EmployeeService employeeService = new EmployeeService();
 
-    // Retrieve list of employees
     List<Employee> employees = null;
     try {
         employees = employeeService.getEmployees();
@@ -52,7 +50,6 @@
         <tbody>
             <%
             if (employees != null) { // Check if employees list is not null
-                // Iterate over the list of employees and generate table rows
                 for (Employee employee : employees) {
             %>
             <tr>
@@ -64,7 +61,7 @@
             </tr>
             <%
                 }
-            } else { // Handle the case when employees list is null
+            } else {
             %>
             <tr>
                 <td colspan="5">No employees found</td>

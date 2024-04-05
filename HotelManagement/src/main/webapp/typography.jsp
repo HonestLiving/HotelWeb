@@ -3,15 +3,13 @@
 <%@ page import="com.demo.RoomService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    // Instantiate RoomService to access room data
+
     RoomService roomService = new RoomService();
     List<Object[]> availableRoomsPerArea = roomService.getAvailableRoomsPerArea();
     List<Object[]> availableRoomsPerHotel = roomService.getAvailableRoomsPerHotel();
 
-    // Retrieve list of rooms
     List<Room> rooms = null;
     try {
-        // Check if parameters are provided in the request
         String name = request.getParameter("name");
         if (name == null) {
             name = "";
@@ -21,7 +19,7 @@
             hotelChain = "";
         }
         double minPrice = 0;
-        double maxPrice = Double.MAX_VALUE; // Set a default maximum price
+        double maxPrice = Double.MAX_VALUE;
         String minPriceParam = request.getParameter("minPrice");
         String maxPriceParam = request.getParameter("maxPrice");
         if (minPriceParam != null && !minPriceParam.isEmpty()) {
@@ -35,7 +33,7 @@
         if (capacityParam != null && !capacityParam.isEmpty()) {
             capacity = Integer.parseInt(capacityParam);
         }
-        String area = ""; // Change data type to String
+        String area = "";
         String areaParam = request.getParameter("area");
         if (areaParam != null && !areaParam.isEmpty()) {
             area = areaParam;
@@ -45,7 +43,6 @@
             hotel = "";
         }
 
-        // Call the searchRooms method with all parameters
         rooms = roomService.searchRooms(name, minPrice, maxPrice, capacity, area, hotelChain, hotel);
     } catch (Exception e) {
         out.println("Error fetching rooms: " + e.getMessage());

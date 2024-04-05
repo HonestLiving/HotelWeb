@@ -5,9 +5,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    // Check if the form was submitted
     if ("POST".equalsIgnoreCase(request.getMethod())) {
-        // Retrieve form parameters
+
         int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
         String customerName = request.getParameter("customerName");
         String email = request.getParameter("email");
@@ -21,7 +20,6 @@
         Date checkInDate = null;
         Date checkOutDate = null;
 
-        // Parse and convert String dates to java.sql.Date if the strings are not null
         if (checkInDateStr != null && checkOutDateStr != null) {
             try {
                 java.util.Date checkInDateUtil = dateFormat.parse(checkInDateStr);
@@ -33,16 +31,13 @@
             }
         }
 
-        // Create Booking object
         Booking booking = new Booking(roomNumber, customerName, email, checkInDate, checkOutDate, hotel, id, status);
 
-        // Insert booking into the database
         BookingService bookingService = new BookingService();
         String message = bookingService.createBooking(booking);
         out.println("<p>" + message + "</p>");
 
 
-        // Redirect to a confirmation page
         response.sendRedirect("confirmation.jsp?message=" + message);
     }
 %>

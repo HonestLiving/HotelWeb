@@ -4,20 +4,19 @@
 <%@ page import="com.demo.BookingStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    // Instantiate the AllBookings class to access bookings
+
     allBookings allBookingsObj = new allBookings();
 
-    List<Booking> bookings = null; // Initialize the list outside the try-catch block
+    List<Booking> bookings = null;
 
     try {
-        // Retrieve all bookings from the database
         bookings = allBookingsObj.getAllBookings();
 
-        // Set the list of bookings as an attribute in the request
+
         request.setAttribute("Bookings", bookings);
     } catch (RuntimeException e) {
-        // Handle runtime exception
-        e.printStackTrace(); // Log the exception for debugging
+
+        e.printStackTrace();
         throw new RuntimeException("Error fetching bookings: " + e.getMessage());
     }
 %>

@@ -41,7 +41,6 @@ public class EmployeeService {
         }
     }
 
-    // Method to create an employee in the database
     public String createEmployee(Employee employee) throws Exception {
         String message = "";
         Connection con = null;
@@ -78,7 +77,6 @@ public class EmployeeService {
         return message;
     }
 
-    // Method to update employee
     public String updateEmployee(Employee employee) throws Exception {
         Connection con = null;
         String message = "";

@@ -24,7 +24,6 @@ public class Archive {
     public Archive () {
     }
 
-
     public Integer getRoomNumber() {
         return room_Number;
     }
